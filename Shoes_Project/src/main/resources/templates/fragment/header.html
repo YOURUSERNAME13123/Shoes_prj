@@ -1,0 +1,59 @@
+<th:block th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+    <header class="header">
+        <div class="header-middle">
+            <div class="container">
+                <div class="header-left col-lg-2 w-auto pl-0">
+                    <button class="mobile-menu-toggler text-primary mr-2" type="button">
+                        <i class="icon-menu"></i>
+                    </button>
+                    <a href="/" class="logo">
+                        <img th:src="@{https://tse3.mm.bing.net/th?id=OIP.KjPkIPLnyjj_g0G-p6cffwHaE0&pid=Api&P=0&h=220}"  alt="logo">
+                    </a>
+                </div><!-- End .header-left -->
+
+                <div class="header-right w-lg-max">
+                    <div class="header-icon header-icon header-search header-search-inline header-search-category w-lg-max text-right">
+                        <a href="#" class="search-toggle search-button" role="button"><i class="icon-search-3"></i></a>
+                            <div class="header-search-wrapper">
+                                <input class="form-control search-input"  placeholder="Nhập sản phẩm cần tìm kiếm..." required>
+                                <button class="btn icon-search-3 p-0 search-button" type="submit"></button>
+                            </div><!-- End .header-search-wrapper -->
+                    </div><!-- End .header-search -->
+
+                    <div class="header-contact d-none d-lg-flex pl-4 ml-3 mr-xl-5 pr-4">
+                        <img alt="phone" th:src="@{/shop/images/phone.png}" width="30" height="30" class="pb-1">
+                        <h6>LIÊN HỆ QUA SĐT<a href="tel:#" class="text-dark font1">0919099617</a></h6>
+                    </div>
+
+                    <a href="" data-toggle="modal" data-target="#exampleModal" class="header-icon account-setting" style="margin-left: 1000px;">
+                        <i class="icon-user-2 "></i>
+                    </a>
+
+                </div><!-- End .header-right -->
+            </div><!-- End .container -->
+        </div><!-- End .header-middle -->
+
+        <div class="header-bottom sticky-header d-none d-lg-block">
+            <div class="container">
+                <nav class="main-nav w-100">
+                    <ul class="menu">
+                        <li class="active">
+                            <a href="/">Trang chủ</a>
+                        </li>
+<!--                        <th:block th:each="brand : ${brands}">-->
+<!--                            <li><a href="/" th:text="${brand.name}">Trang chủ</a></li>-->
+<!--                        </th:block>-->
+<!--                        <li class="float-right mr-0"><a href="/gio-hang">Giỏ hàng</a></li>-->
+                        <li class="float-right mr-0"><a href="/lien-he" class="px-4">Liên hệ</a></li>
+                        <li class="float-right"><a href="/tai-khoan/lich-su-giao-dich">Giỏ hàng</a></li>
+<!--                        <a class="buying-order nav-item" href="/tai-khoan/lich-su-giao-dich">Quản lý đơn hàng</a>-->
+                        <li class="float-right"><a href="/doi-hang">Chính sách</span></a></li>
+                        <li class="float-right"><a href="/tin-tuc">Tin tức</a></li>
+                        <li class="float-right"><a href="/san-pham">Sản phẩm</a></li>
+
+                    </ul>
+                </nav>
+            </div><!-- End .container -->
+        </div><!-- End .header-bottom -->
+    </header><!-- End .header -->
+</th:block>

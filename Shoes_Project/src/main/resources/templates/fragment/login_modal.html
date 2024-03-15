@@ -1,0 +1,173 @@
+<!-- Modal -->
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Other HTML declarations -->
+
+<th:block th:fragment="login_modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Đăng nhập</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-sparse">
+                        <div class="col-md-12">
+                            <form class="mb-1" id="loginForm">
+                                <label for="login_email" style="font-family: Arial;">Email <span
+                                        class="required">*</span></label>
+                                <input type="email" class="form-input form-wide mb-2" name="login_email"
+                                       id="login_email">
+                                <br>
+                                <label for="login_password" style="font-family: Arial;">Mật khẩu <span
+                                        class="required">*</span></label>
+                                <input type="password" class="form-input form-wide mb-2" name="login_password"
+                                       id="login_password">
+                                <br>
+                                <div class="form-footer"
+                                     style="display: flex; justify-content: space-between; margin: 0 -5px;">
+                                    <button type="submit" class="btn btn-primary btn-sm"
+                                            style="flex: 1; margin: 0 2px; width:100px;">Đăng nhập</button>
+                                    <button data-toggle="modal" href="#exampleModalRegister" data-dismiss="modal"
+                                            class="btn btn-secondary btn-sm"
+                                            style="flex: 1; margin: 0 2px; width:100px;">Đăng ký</button>
+                                    <!-- Thêm liên kết "Quên mật khẩu" -->
+                                    <a href="#" id="forgotPasswordLink"
+                                       data-toggle="modal" data-target="#exampleModalForgotPassword"
+                                       style="display: inline-block;
+                                          border: 1.5px solid black;
+                                          padding: 12px;
+                                          margin-right: 5px;
+                                          margin-left: 2px;
+                                          background-color: red; /* Màu giống với btn-primary */
+                                          color: white; /* Màu chữ */
+                                          text-decoration: none;
+                                          font-family: Poppins, sans-serif;
+                                          text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* Hiệu ứng đổ bóng chữ */
+
+                                       ">
+                                        QUÊN MẬT KHẨU
+                                    </a>
+
+                                </div>
+                                <!-- End .form-footer -->
+                            </form>
+                        </div><!-- End .col-md-6 -->
+                    </div><!-- End .row -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="exampleModalRegister" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Đăng ký</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-sparse">
+                        <div class="col-md-12">
+                            <form action="#" id="registerForm">
+                                <label for="register_full_name" style="font-family: Arial;">Họ và tên <span class="required">*</span></label>
+                                <input type="text" class="form-input form-wide mb-2" name="register_full_name" id="register_full_name">
+                                <br>
+                                <label for="register_phone" style="font-family: Arial;">Số điện thoại <span class="required">*</span></label>
+                                <input type="text" class="form-input form-wide mb-2" name="register_phone" id="register_phone">
+                                <br>
+                                <label for="register_email" style="font-family: Arial;">Email <span class="required">*</span></label>
+                                <input type="email" class="form-input form-wide mb-2" name="register_email" id="register_email">
+                                <br>
+                                <label for="register_password" style="font-family: Arial;">Mật khẩu <span class="required">*</span></label>
+                                <input type="password" class="form-input form-wide mb-2" name="register_password" id="register_password">
+                                <br>
+                                <label for="register_confirm_password" style="font-family: Arial;">Nhập lại mật khẩu <span class="required">*</span></label>
+                                <input type="password" class="form-input form-wide mb-2" name="register_confirm_password" id="register_confirm_password">
+                                <div class="form-footer" style="display: flex; justify-content: space-between;">
+                                    <button type="submit" class="btn btn-primary btn-md" style="flex: 1;">Đăng ký</button>
+                                    <button data-toggle="modal" href="#exampleModal" data-dismiss="modal" class="btn btn-secondary btn-md" style="flex: 1; margin-left: 50px;">Quay lại</button>
+                                </div>
+                            </form>
+                        </div><!-- End .col-md-6 -->
+                    </div><!-- End .row -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Quên mật khẩu -->
+    <div class="modal fade" id="exampleModalForgotPassword" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-weight:bold; font-size:15px; font:Arial;">Nhập địa chỉ Email đã đăng ký để tạo mật khẩu mới</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <label for="forgot_email" style="font-size:14px;"><i class="fa fa-envelope" aria-hidden="true" style="margin-right:2px"></i>Email <span class="required">*</span></label>
+                        <input type="email" class="form-input form-wide mb-2" name="forgot_email" id="forgot_email">
+                        <button type="submit" class="btn btn-primary btn-md">Gửi yêu cầu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Thư viện Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Thêm xử lý sự kiện cho liên kết "Quên mật khẩu"
+            $("#forgotPasswordLink").click(function () {
+                $("#exampleModalForgotPassword").modal("show");
+            });
+
+            // Thêm xử lý sự kiện cho form Quên mật khẩu
+            $("#forgotPasswordForm").submit(function (e) {
+                e.preventDefault();
+
+                let email = $("#forgot_email").val();
+
+                // Kiểm tra nếu email không được nhập
+                if (!email) {
+                    toastr.warning("Vui lòng nhập địa chỉ email");
+                    return;
+                }
+
+                // Gửi yêu cầu thay đổi mật khẩu đến server
+                $.ajax({
+                    url: '/api/forgot-password',
+                    type: 'POST',
+                    data: JSON.stringify({ "email": email }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        toastr.success("Yêu cầu thay đổi mật khẩu đã được gửi");
+                        $("#exampleModalForgotPassword").modal("hide");
+                    },
+                    error: function (error) {
+                        toastr.warning(error.responseJSON.message);
+                    },
+                });
+            });
+        });
+    </script>
+
+
+
+</th:block>
+</html>

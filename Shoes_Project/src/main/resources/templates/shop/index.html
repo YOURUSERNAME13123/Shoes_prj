@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                      th:replace="~{/layout/layout :: main-fragment(
+                                                                     ~{:: title},
+                                                                    'header',
+                                                                    'footer',
+                                                                     ~{:: #css-resources},
+                                                                     ~{:: #js-resources},
+                                                                     ~{:: #main-content}
+                                                                    )}">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop Shoes</title>
+    <th:block id="css-resources">
+
+    </th:block>
+</head>
+<body>
+<main class="main" id="main-content">
+    <div class="home-slider owl-carousel owl-theme owl-carousel-lazy show-nav-hover nav-big mb-2 text-uppercase" data-owl-options="{'loop': false}">
+        <div class="home-slide home-slide1 banner" style="position: relative; max-width: 90%; margin: 0 auto;">
+            <img class="owl-lazy slide-bg"
+                 th:src="@{/shop/images/slider/s_1.jpg}"
+                 data-src="/shop/images/slider/s_1.jpg"
+                 alt="slider image"
+                 style="width: 100%; height: auto; display: block;">
+
+            <div class="overlay-text">
+                <p class="thank-you">Thank you</p> <hr>
+                <p class="additional-text">quý khách đã ghé thăm cửa hàng</p>
+            </div>
+        </div><!-- End .home-slide -->
+    </div><!-- End .home-slider -->
+
+    <style>
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .thank-you {
+            font-size: 52px;
+            font-weight: bold;
+            color: grey; /* Màu grey */
+            font-family: 'Script', cursive; /* Sử dụng font chữ Script */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Hiệu ứng đổ bóng chữ */
+        }
+
+        .additional-text {
+            font-size: 30px;
+            color: grey; /* Màu grey */
+            margin-top: 5px; /* Khoảng cách giữa các dòng chữ */
+        }
+
+        .home-slide:hover .overlay-text {
+            opacity: 1;
+        }
+    </style>
+
+
+
+    <div class="container">
+        <div class="info-boxes-slider owl-carousel owl-theme mb-2" data-owl-options="{
+					'dots': false,
+					'loop': false,
+					'responsive': {
+						'576': {
+							'items': 2
+						},
+						'992': {
+							'items': 3
+						}
+					}
+				}">
+            <div class="info-box info-box-icon-left">
+                <i class="icon-shipping"></i>
+
+                <div class="info-box-content">
+                    <h4>MIỄN PHÍ GIAO HÀNG TOÀN QUỐC</h4>
+                    <p class="text-body">Miễn phí giao hàng với đơn hàng trên 500.000VNĐ</p>
+                </div><!-- End .info-box-content -->
+            </div><!-- End .info-box -->
+
+            <div class="info-box info-box-icon-left">
+                <i class="icon-money"></i>
+
+                <div class="info-box-content">
+                    <h4>MIỄN PHÍ ĐỔI TRẢ</h4>
+                    <p class="text-body">Hoàn trả 100% giá trị đơn hàng</p>
+                </div><!-- End .info-box-content -->
+            </div><!-- End .info-box -->
+
+            <div class="info-box info-box-icon-left">
+                <i class="icon-support"></i>
+
+                <div class="info-box-content">
+                    <h4>Phục vụ trực tuyến 24/7</h4>
+                    <p class="text-body">Hỗ trợ nhiệt tình cho khách hàng</p>
+                </div><!-- End .info-box-content -->
+            </div><!-- End .info-box -->
+        </div><!-- End .info-boxes-slider -->
+    </div><!-- End .container -->
+
+    <section class="featured-products-section">
+        <div class="container">
+            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm mới</h2>
+
+            <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center" data-owl-options="{
+						'dots': false,
+						'nav': true
+					}">
+                <th:block th:each="newProduct :${newProducts}">
+                    <div class="product-default">
+                    <figure>
+                        <a th:href="@{/{slug}/{id}(id=${newProduct.id},slug=${newProduct.slug})}">
+                            <img th:src="@{${newProduct.images}}" alt="product">
+                        </a>
+                    </figure>
+                    <div class="product-details">
+                        <h3 class="product-title">
+                            <a th:href="@{/{slug}/{id}(id=${newProduct.id},slug=${newProduct.slug})}" th:text="${newProduct.name}"></a>
+                        </h3>
+                        <div class="price-box">
+                            <th:block th:if="${newProduct.promotionPrice}">
+                                <span class="product-price" th:text="${#numbers.formatDecimal(newProduct.promotionPrice, 0, 'COMMA', 0, 'POINT') +' đ'}"></span>
+                                <del class="old-price" th:text="${#numbers.formatDecimal(newProduct.price, 0, 'COMMA', 0, 'POINT') +' đ'}"></del>
+                            </th:block>
+                            <th:block th:unless="${newProduct.promotionPrice}">
+                                <span class="product-price" th:text="${#numbers.formatDecimal(newProduct.price, 0, 'COMMA', 0, 'POINT') +' đ'}"></span>
+                            </th:block>
+                        </div><!-- End .price-box -->
+                        <div class="ratings-container">
+                            <p class="card-text sold">&Dstrok;&atilde; b&aacute;n <span th:text="${newProduct.totalSold}"></span> &dstrok;&ocirc;i</p>
+                        </div><!-- End .product-container -->
+                        <div class="product-action">
+                            <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                            <button id="btnAddToCart" class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal">Mua hàng</button>
+                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div><!-- End .product-details -->
+                </div>
+                </th:block>
+            </div><!-- End .featured-proucts -->
+        </div>
+    </section>
+
+    <section class="new-products-section">
+        <div class="container">
+            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm mua nhiều</h2>
+
+            <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center" data-owl-options="{
+						'dots': false,
+						'nav': true,
+						'responsive': {
+							'992': {
+								'items': 5
+							}
+						}
+					}">
+                <th:block th:each="sell : ${bestSellerProducts}">
+                    <div class="product-default">
+                    <figure>
+                        <a th:href="@{/{slug}/{id}(id=${sell.id},slug=${sell.slug})}">
+                            <img th:src="@{${sell.images}}" alt="product">
+                        </a>
+                        <div class="label-group">
+                            <div class="product-label label-hot">HOT</div>
+                        </div>
+                    </figure>
+                    <div class="product-details">
+                        <h3 class="product-title">
+                            <a th:href="@{/{slug}/{id}(id=${sell.id},slug=${sell.slug})}" th:text="${sell.name}"></a>
+                        </h3>
+                        <div class="price-box">
+                            <th:block th:if="${sell.promotionPrice}">
+                                <span class="product-price" th:text="${#numbers.formatDecimal(sell.promotionPrice, 0, 'COMMA', 0, 'POINT') +' đ'}"></span>
+                                <del class="old-price" th:text="${#numbers.formatDecimal(sell.price, 0, 'COMMA', 0, 'POINT') +' đ'}"></del>
+                            </th:block>
+                            <th:block th:unless="${sell.promotionPrice}">
+                                <span class="product-price" th:text="${#numbers.formatDecimal(sell.price, 0, 'COMMA', 0, 'POINT') +' đ'}"></span>
+                            </th:block>
+                        </div><!-- End .price-box -->
+                        <div class="ratings-container">
+                            <p class="card-text sold">&Dstrok;&atilde; b&aacute;n <span th:text="${sell.totalSold}"></span> &dstrok;&ocirc;i</p>
+                        </div><!-- End .product-container -->
+                        <div class="product-action">
+                            <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                            <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal">Mua hàng</button>
+                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div><!-- End .product-details -->
+                </div>
+                </th:block>
+            </div><!-- End .featured-proucts -->
+        </div>
+    </section>
+
+    <section class="featured-products-section">
+        <div class="container">
+            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm xem nhiều</h2>
+
+            <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center" data-owl-options="{
+						'dots': false,
+						'nav': true
+					}">
+                <th:block th:each="view : ${viewProducts}">
+                    <div class="product-default">
+                    <figure>
+                        <a th:href="@{/{slug}/{id}(id=${view.id},slug=${view.slug})}">
+                            <img th:src="@{${view.images}}" alt="product">
+                        </a>
+                    </figure>
+                    <div class="product-details">
+                        <h3 class="product-title">
+                            <a th:href="@{/{slug}/{id}(id=${view.id},slug=${view.slug})}" th:text="${view.name}"></a>
+                        </h3>
+                        <div class="price-box">
+                            <th:block th:if="${view.promotionPrice}">
+                                <span class="product-price" th:text="${#numbers.formatDecimal(view.promotionPrice, 0, 'COMMA', 0, 'POINT') +' đ'}"></span>
+                                <del class="old-price" th:text="${#numbers.formatDecimal(view.price, 0, 'COMMA', 0, 'POINT') +' đ'}"></del>
+                            </th:block>
+                            <th:block th:unless="${view.promotionPrice}">
+                                <span class="product-price" th:text="${#numbers.formatDecimal(view.price, 0, 'COMMA', 0, 'POINT') +' đ'}"></span>
+                            </th:block>
+                        </div><!-- End .price-box -->
+                        <div class="ratings-container">
+                            <p class="card-text sold">&Dstrok;&atilde; b&aacute;n <span th:text="${view.totalSold}"></span> &dstrok;&ocirc;i</p>
+                        </div><!-- End .product-container -->
+                        <div class="ratings-container">
+                            <p class="card-text sold">Số lượt xem: <span th:text="${view.views}"></span></p>
+                        </div><!-- End .product-container -->
+                        <div class="product-action">
+                            <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                            <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal">Mua hàng</button>
+                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div><!-- End .product-details -->
+                </div>
+                </th:block>
+            </div><!-- End .featured-proucts -->
+        </div>
+    </section>
+    <section class="blog-section">
+        <div class="container">
+            <h2 class="section-title heading-border border-0 mb-2">Tin mới nhất</h2>
+
+            <div class="owl-carousel owl-theme" data-owl-options="{
+						'loop': false,
+						'margin': 20,
+						'autoHeight': true,
+						'autoplay': false,
+						'dots': false,
+						'items': 2,
+						'responsive': {
+							'576': {
+								'items': 3
+							},
+							'768': {
+								'items': 4
+							}
+						}
+					}">
+                <th:block th:each="post : ${posts}">
+                    <article class="post">
+                    <div class="post-media">
+                        <a th:href="@{/tin-tuc/{slug}/{id}(id=${post.id},slug=${post.slug})}">
+                            <img th:src="@{${post.thumbnail}}" alt="Post" width="225" height="280">
+                        </a>
+                        <div class="post-date">
+                            <span th:text="${#dates.format(post.publishedAt, 'MM yyyy')}"></span></p>
+                        </div>
+                    </div><!-- End .post-media -->
+
+                    <div class="post-body">
+                        <h2 class="post-title">
+                            <a th:href="@{/tin-tuc/{slug}/{id}(id=${post.id},slug=${post.slug})}" th:text="${post.title}"></a>
+                        </h2>
+                        <div class="post-content">
+                            <p th:utext="${post.content}"></p>
+                        </div><!-- End .post-content -->
+<!--                        <a href="single.html" class="post-comment">0 Comments</a>-->
+                    </div><!-- End .post-body -->
+                </article><!-- End .post -->
+                </th:block>
+            </div>
+
+            <hr class="mt-0 m-b-5">
+        </div>
+    </section>
+</main><!-- End .main -->
+
+<th:block id="js-resources">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Chọn nút "Mua hàng" bằng ID
+            var btnAddToCart = document.getElementById('btnAddToCart');
+
+            // Thêm sự kiện click
+            btnAddToCart.addEventListener('click', function () {
+                // Chuyển hướng đến trang giỏ hàng
+                window.location.href = '/tai-khoan/lich-su-giao-dich';
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>
